@@ -29,13 +29,13 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(7, 1fr);
     grid-template-areas: 
-    'exp exp exp exp'
+    'exp exp exp op'
     'result result result result'
     'clear clear enter enter'
     'seven eight nine mult'
     'four five six div'
     'one two three sub'
-    'posneg zero decimal add';
+    'zero zero decimal add';
     padding: 15px;
     box-shadow: 12px 12px 2px 2px rgba(66,73,76,.2);
 }
@@ -43,13 +43,23 @@ body {
 /*result display*/
 #preview-expression {
     grid-area: exp;
-    color: #D3D0CB;
+    color: #88847c;
     font-size: 1.5em;
     background-color: #E7E5DF;
     text-align: end;
-    margin: 65px 0 0 0;
+    margin: 25px 0 0 0;
     padding: 5px;
 
+}
+
+#preview-operator {
+    grid-area: op;
+    color: #88847c;
+    font-size: 1.5em;
+    background-color: #E7E5DF;
+    text-align: start;
+    margin: 25px 0 0 0;
+    padding: 5px;
 }
 
 #preview-result {
@@ -58,7 +68,7 @@ body {
     font-size: 2em;
     background-color: #E7E5DF;
     text-align: end;
-    margin: 0 0 65px 0;
+    margin: 0 0 25px 0;
     padding: 5px;
     font-weight: 900;
 }
@@ -162,11 +172,6 @@ body {
 
 #divide-btn {
     grid-area: div;
-}
-
-#pos-neg-btn {
-    grid-area: posneg;
-    font-size: 2em;
 }
 
 #decimal-btn {
