@@ -1,109 +1,108 @@
+class Calculator {
+    constructor(pastValueText, currentValueText) {
+        this.pastValueText = pastValueText
+        this.currentValueText = currentValueText
+        this.clearAll()
+    }
+
+    //CLEAR ALL VALUES
+    clearAll() {
+        this.pastValue = ''
+        this.operator = undefined
+        this.currentValue = ''
+    }
+
+    //ADD VALUE TO currentValueText
+    appendNumber(number) {
+        if (number === '.' && this.currentValue.includes('.')) return
+        this.currentValue = this.currentValue + number
+    }
+
+    //ADD THE SELECTED OPERATOR
+    chooseOperator(operator) {
+        if (this.currentValue === '') return
+        if (this.pastValue !== '') {
+            this.operate()
+        }
+        this.operator = operator
+        this.pastValue = this.currentValue
+        this.currentValue = ''
+    }
+
+    //ADD, SUBTRACT, MULT, DIVIDE pastV and currentV
+    operate() {
+        let result
+        const pastV = parseFloat(this.pastValue)
+        const currentV = parseFloat(this.currentValue)
+        if (isNaN(pastV) || isNaN(currentV)) return
+        switch (this.operator) {
+            case '+':
+                result = pastV + currentV
+                break;
+            case '-':
+                result = pastV - currentV
+                break;
+            case '*':
+                result = pastV * currentV
+                break;
+            case '/':
+                result = pastV / currentV
+                break;
+            default:
+                return
+        }
+        this.currentValue = result;
+        this.operator = undefined;
+        this.pastValue = ''
+    }
+
+    //UPDATE THE DIVS
+    updateDisplay() {
+        this.currentValueText.innerText = this.currentValue
+        if (this.operator != null) {
+            this.pastValueText.innerText = 
+            `${this.pastValue} ${this.operator}`
+        } else {
+            this.pastValueText.innerText = ''
+        }
+    }
+}
+
 //DOM
-const currentExpression = document.querySelector('#preview-expression');
-const expressionResult = document.querySelector('#preview-result');
-const operatorVal = document.querySelector('#preview-operator');
+const currentValueText = document.querySelector('#preview-result');
+const pastValueText = document.querySelector('#preview-expression');
 
 const clearBtn = document.querySelector('#clear-btn');
 const enterBtn = document.querySelector('#enter-btn');
 const operatorBtn = document.querySelectorAll('.op');
 const numBtn = document.querySelectorAll('.num');
 
-let temp, tempTwo;
 
 
 
-//number btn onclick
+//NEW CALCULATOR OBJ
+const calculator = new Calculator(pastValueText, currentValueText)
+
 numBtn.forEach(btn => {
     btn.addEventListener('click', () => {
-        let pushedBtn = btn.innerText;
-        expressionResult.textContent += pushedBtn;
-        temp = expressionResult.textContent;
-    });
-});
+        calculator.appendNumber(btn.innerText)
+        calculator.updateDisplay()
+    })
+})
 
-//operator btn onclick
 operatorBtn.forEach(btn => {
     btn.addEventListener('click', () => {
-        let pushedBtn = btn.innerText;
-        operatorVal.textContent = pushedBtn;
-        setCurrentExpression();
-        expressionResult.textContent = '';
-    });
-});
+        calculator.chooseOperator(btn.innerText)
+        calculator.updateDisplay()
+    })
+})
 
-//clear btn onclick
-clearBtn.addEventListener('click', clearText);
+clearBtn.addEventListener('click', btn => {
+    calculator.clearAll()
+    calculator.updateDisplay()
+})
 
-//enter btn onclick
-enterBtn.addEventListener('click', () => {
-    expressionResult.innerText = operate();
-    currentExpression.innerText = '';
-    operatorVal.innerText = '';
-});
-
-
-//CALCULATOR FUNCTIONS
-//set current result to last one
-function setCurrentExpression(curVal) {
-    currentExpression.innerText = expressionResult.innerText;
-}
-
-
-//clear current displayed text
-function clearText() {
-    currentExpression.innerText = '';
-    expressionResult.innerText = '';
-    operatorVal.innerText = '';
-}
-
-
-//FOUR BASIC CALCULATOR FUNCTIONS:
-//add +
-function addVal(x, y) {
-    return x + y
-}
-
-//subtract -
-function subtractVal(x, y) {
-    return x - y
-}
-
-//mult *
-function multVal(x, y) {
-    return x * y
-}
-
-//divide / 
-function divideVal(x, y) {
-    return x / y
-}
-
-
-//Solve expression
-function operate(operator, lastVal, curVal) {
-    lastVal = Number(currentExpression.innerText);
-    curVal = Number(expressionResult.innerText);
-
-    switch (operatorVal.innerText) {
-        case '+':
-            operator = addVal(lastVal, curVal)
-            break;
-        case '-':
-            operator = subtractVal(lastVal, curVal)
-            break;
-        case '*':
-            operator = multVal(lastVal, curVal)
-            break;
-        case '/':
-            operator = divideVal(lastVal, curVal)
-            break;
-    }
-    return operator
-}
-
-
-//ORIGINAL STATEMENTS 
-// if (operatorVal.innerText == '+') {return operator = addVal(lastVal, curVal)}
-// else if (operatorVal.innerText == '-') {return operator = subtractVal(lastVal, curVal)}
-// else if (operatorVal.innerText == '*') {return operator = multVal(lastVal, curVal)}
-// else if (operatorVal.innerText == '/') {return operator = divideVal(lastVal, curVal)}
+enterBtn.addEventListener('click', btn => {
+    calculator.operate()
+    calculator.updateDisplay()
+})
