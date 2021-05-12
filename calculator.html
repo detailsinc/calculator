@@ -16,34 +16,33 @@
     <!--Calculator div-->
     <div id="calc-container">
 
-        <!--Text to display equations-->
+        <!--Div to display equations-->
         
-        <p id="preview-expression"></p>
-        <p id="preview-operator"></p>
-        <p id="preview-result"></p>
+        <div id="preview-expression" data-last-value></div>
+        <div id="preview-result" data-current-value></div>
 
         <!--Clear & Enter Buttons-->
-        <button id="clear-btn" value="clear">Clear</button>
-        <button id="enter-btn" value="enter">Enter</button>
+        <button id="clear-btn" data-clear>Clear</button>
+        <button id="enter-btn" data-enter>Enter</button>
 
         <!--0-9 Buttons-->
-        <button class="btn num" id="zero-btn" value="0">0</button>
-        <button class="btn num" id="one-btn" value="1">1</button>
-        <button class="btn num" id="two-btn" value="2">2</button>
-        <button class="btn num" id="three-btn" value="3">3</button>
-        <button class="btn num" id="four-btn" value="4">4</button>
-        <button class="btn num" id="five-btn" value="5">5</button>
-        <button class="btn num" id="six-btn" value="6">6</button>
-        <button class="btn num" id="seven-btn" value="7">7</button>
-        <button class="btn num" id="eight-btn" value="8">8</button>
-        <button class="btn num" id="nine-btn" value="9">9</button>
-        <button class="btn num" id="decimal-btn" value=".">.</button>
+        <button class="num" id="zero-btn" data-number>0</button>
+        <button class="num" id="one-btn" data-number>1</button>
+        <button class="num" id="two-btn" data-number>2</button>
+        <button class="num" id="three-btn" data-number>3</button>
+        <button class="num" id="four-btn" data-number>4</button>
+        <button class="num" id="five-btn" data-number>5</button>
+        <button class="num" id="six-btn" data-number>6</button>
+        <button class="num" id="seven-btn" data-number>7</button>
+        <button class="num" id="eight-btn" data-number>8</button>
+        <button class="num" id="nine-btn" data-number>9</button>
+        <button class="num" id="decimal-btn" data-number>.</button>
 
         <!--Operators & etc.-->
-        <button class="btn op" id="add-btn" value="+">+</button>
-        <button class="btn op" id="subtract-btn" value="-">-</button>
-        <button class="btn op" id="multiply-btn" value="*">*</button>
-        <button class="btn op" id="divide-btn" value="/">/</button>
+        <button class="op" id="add-btn" data-operator>+</button>
+        <button class="op" id="subtract-btn" data-operator>-</button>
+        <button class="op" id="multiply-btn" data-operator>*</button>
+        <button class="op" id="divide-btn" data-operator>/</button>
 
     </div>
 
